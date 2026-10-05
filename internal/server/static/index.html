@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Go System Monitor</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Go System Monitor</h1>
+        <p id="timestamp">Waiting for metrics</p>
+      </div>
+      <nav class="actions" aria-label="Monitor actions">
+        <label>
+          <span>Refresh</span>
+          <select id="refresh">
+            <option value="2000">2s</option>
+            <option value="5000" selected>5s</option>
+            <option value="10000">10s</option>
+          </select>
+        </label>
+        <a href="/api/stats">JSON</a>
+        <a href="/metrics">Metrics</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="summary" aria-label="System summary">
+        <article class="tile">
+          <span>CPU Used</span>
+          <strong id="cpu-used">--</strong>
+          <div class="tile-progress"><span id="cpu-progress"></span></div>
+          <small id="cpu-cores">-- cores</small>
+        </article>
+        <article class="tile">
+          <span>Memory Used</span>
+          <strong id="memory-used">--</strong>
+          <div class="tile-progress"><span id="memory-progress"></span></div>
+          <small id="memory-free">-- available</small>
+        </article>
+        <article class="tile">
+          <span>Disk Used</span>
+          <strong id="disk-used">--</strong>
+          <div class="tile-progress"><span id="disk-progress"></span></div>
+          <small id="disk-free">-- free</small>
+        </article>
+        <article class="tile">
+          <span>Collection</span>
+          <strong id="duration">--</strong>
+          <div class="tile-progress"><span id="duration-progress"></span></div>
+          <small id="status">starting</small>
+        </article>
+      </section>
+
+      <section class="panel chart-panel" aria-label="Metric trends">
+        <div class="panel-title">
+          <h2>Usage Trend</h2>
+          <span id="warning"></span>
+        </div>
+        <div class="chart-frame">
+          <canvas id="trend"></canvas>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <div class="panel-title">
+            <h2>Disks</h2>
+          </div>
+          <div id="disks" class="disk-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-title">
+            <h2>Raw Metrics</h2>
+          </div>
+          <div id="metrics" class="metric-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/chart.umd.min.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

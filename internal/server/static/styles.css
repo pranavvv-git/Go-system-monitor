@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+:root {
+  color-scheme: dark;
+  --bg: #111417;
+  --surface: #1a1f24;
+  --surface-2: #232a30;
+  --text: #f2f5f7;
+  --muted: #9aa6af;
+  --line: #313a42;
+  --blue: #65a6ff;
+  --teal: #45d6b5;
+  --amber: #f0b84d;
+  --red: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 84px;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+  background: #15191d;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.topbar p,
+small,
+.metric-help,
+.disk-path,
+.actions span {
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actions label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+select,
+.actions a {
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+.actions a {
+  display: inline-flex;
+  align-items: center;
+}
+
+main {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tile,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.tile {
+  min-height: 116px;
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.tile span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tile strong {
+  font-size: 31px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+body.loading .tile strong {
+  width: 76px;
+  height: 31px;
+  border-radius: 6px;
+  color: transparent;
+  background: linear-gradient(90deg, #222930, #303942, #222930);
+  background-size: 220% 100%;
+  animation: shimmer 1.15s infinite linear;
+}
+
+body.loading #status::after {
+  content: "";
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 6px;
+  border: 2px solid var(--line);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  vertical-align: -0.12em;
+  animation: spin 0.8s linear infinite;
+}
+
+.tile-progress {
+  height: 7px;
+  border-radius: 999px;
+  background: #101316;
+  overflow: hidden;
+}
+
+.tile-progress > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--teal);
+  transition: width 240ms ease, background 240ms ease;
+}
+
+.tile-progress > span.warn {
+  background: var(--amber);
+}
+
+.tile-progress > span.danger {
+  background: var(--red);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chart-panel {
+  margin-top: 16px;
+  padding: 18px;
+}
+
+.panel-title {
+  min-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+#warning {
+  color: var(--amber);
+  font-size: 13px;
+  text-align: right;
+}
+
+.chart-frame {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #12171b;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.panel {
+  padding: 18px;
+  min-width: 0;
+}
+
+.disk-list,
+.metric-list {
+  display: grid;
+  gap: 10px;
+}
+
+.disk-row,
+.metric-row {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  background: var(--surface-2);
+}
+
+.disk-head,
+.metric-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.disk-head strong,
+.metric-head strong {
+  overflow-wrap: anywhere;
+}
+
+.bar {
+  height: 8px;
+  margin: 10px 0;
+  border-radius: 999px;
+  background: #101316;
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: var(--teal);
+}
+
+.bar > span.warn {
+  background: var(--amber);
+}
+
+.bar > span.danger {
+  background: var(--red);
+}
+
+.metric-value {
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.metric-help {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .summary,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 16px;
+  }
+}
