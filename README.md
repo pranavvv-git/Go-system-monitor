@@ -1,6 +1,8 @@
-# GO-SYSMETRICS
+# Go System Monitor
 
-A cross-platform system monitor built with Go. It tracks CPU, memory, disk, and network usage with Prometheus, JSON API, and a live dashboard.
+A cross-platform system monitoring app written in Go. It collects CPU, memory,
+and disk metrics concurrently, exposes Prometheus-compatible output, provides a
+JSON API, and serves a real-time browser dashboard from the same single binary.
 
 ## Features
 
